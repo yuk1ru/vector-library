@@ -11,16 +11,6 @@ public class Vector
         this.dimension = this.coordinates.length;
     }
 
-    public int GetDimension()
-    {
-        return this.dimension;
-    }
-
-    public int[] GetCoordinates()
-    {
-        return this.coordinates;
-    }
-
     public double GetLength()
     {
         int sum = 0;
@@ -60,4 +50,22 @@ public class Vector
             sumCoordinates[i] = this.coordinates[i] + coordinates[i];
         return sumCoordinates;
     }
+
+    private int ProductOfCoordinates(int[] coordinates)
+    {
+        if (this.dimension != coordinates.length)
+            return 0;
+
+        int productCoordinates = 0;
+        for (int i = 0; i < this.dimension - 1; i++)
+            productCoordinates += this.coordinates[i] * coordinates[i];
+        return productCoordinates;
+    }
+
+    public int ScalarProduct(Vector vector)
+    {
+        return ProductOfCoordinates(vector.coordinates);
+    }
+
+
 }
