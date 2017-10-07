@@ -3,69 +3,63 @@ package vector;
 public class Vector
 {
     private int[] coordinates;
-    private int dimension;
 
-    public Vector(int ... c)
+    public Vector(int ... params)
     {
-        this.coordinates = c.clone();
-        this.dimension = this.coordinates.length;
+        coordinates = params;
     }
 
-    public double GetLength()
+    private boolean dimensionCheck(Vector vector)
     {
-        int sum = 0;
-        for (int i : this.coordinates)
-            sum += i * i;
-        return Math.sqrt(sum);
+        return coordinates.length == vector.coordinates.length;
     }
 
-    public Vector MultByScalar(int a)
+    private double length()
     {
-        return new Vector(CoordinatesByScalar(a));
+        int temp = 0;
+
+        for (int element : coordinates)
+            temp += element * element;
+        return Math.sqrt(temp);
     }
 
-    private int[] CoordinatesByScalar(int a)
+    public Vector add(Vector vector)
     {
-        int[] newCoordinates = new int[this.dimension];
-        for (int i = 0; i < this.dimension - 1; i++)
-            newCoordinates[i] = a * this.coordinates[i];
-        return newCoordinates;
-    }
+        if (!dimensionCheck(vector))
+            return new Vector(); //exception
 
-    public Vector Add(Vector vector)
-    {
-        int[] newCoordinates = SumOfCoordinates(vector.coordinates);
-        if (newCoordinates.length == 0)
-            return new Vector(0);
+        int[] newCoordinates = new int[coordinates.length];
+        for (int i = 0; i < coordinates.length; i++)
+            newCoordinates[i] = coordinates[i] + vector.coordinates[i];
         return new Vector(newCoordinates);
     }
 
-    private int[] SumOfCoordinates(int[] coordinates)
+    public Vector multByScalar(int scalar)
     {
-        if (this.dimension != coordinates.length)
-            return new int[] {};
-
-        int[] sumCoordinates = new int[this.dimension];
-        for (int i = 0; i < this.dimension - 1; i++)
-            sumCoordinates[i] = this.coordinates[i] + coordinates[i];
-        return sumCoordinates;
+        int[] newCoordinates = new int[coordinates.length];
+        for (int i = 0; i < coordinates.length; i++)
+            newCoordinates[i] = coordinates[i] * scalar;
+        return new Vector(newCoordinates);
     }
 
-    private int ProductOfCoordinates(int[] coordinates)
+    public int scalarProduct(Vector vector)
     {
-        if (this.dimension != coordinates.length)
-            return 0;
+        if (!dimensionCheck(vector))
+            return Integer.MIN_VALUE; //exception
 
-        int productCoordinates = 0;
-        for (int i = 0; i < this.dimension - 1; i++)
-            productCoordinates += this.coordinates[i] * coordinates[i];
-        return productCoordinates;
+        int temp = 0;
+        for (int i = 0; i < coordinates.length; i++)
+            temp += coordinates[i] * vector.coordinates[i];
+        return temp;
     }
 
-    public int ScalarProduct(Vector vector)
+    public boolean equals(Vector vector)
     {
-        return ProductOfCoordinates(vector.coordinates);
+        //if (!dimensionCheck(vector)) exception
+        //    return ;
+        for (int i = 0; i < coordinates.length; i++)
+            if (coordinates[i] != vector.coordinates[i])
+                return false;
+        return true;
     }
-
-
 }
