@@ -1,27 +1,14 @@
 package vector;
 
-public abstract class Vector implements IVector {
-    private double[] coordinates;
+import java.util.Arrays;
 
-    private Vector newVector(double[] coordinates) {
-        switch (coordinates.length) {
-            case 2:
-                return new Vector2d(coordinates);
-            case 3:
-                return new Vector3d(coordinates);
-            default:
-                return new VectorNd(coordinates);
-        }
-    }
+abstract class Vector {
+    protected double[] coordinates;
 
-    /*
-    public abstract void setCoordinates(double x, double y);
-    public abstract void setCoordinates(double x, double y, double z);
-    public abstract void setCoordinates(double ... coordinates);
-    */
+    protected abstract Vector newVector(double[] coordinates);
 
-    public double[] getCoordinates() {
-        return coordinates;
+    Vector(double ... coordinates) {
+        this.coordinates = coordinates;
     }
 
     @Override
@@ -36,7 +23,7 @@ public abstract class Vector implements IVector {
     public boolean equals(Object obj) {
         if (obj == null)
             return false;
-        if (!this.getClass().isInstance(obj.getClass()))
+        if (!this.getClass().isAssignableFrom(obj.getClass()))
             return false;
         final Vector other = (Vector) obj;
         for (int i = 0; i < coordinates.length; i++)
@@ -46,42 +33,32 @@ public abstract class Vector implements IVector {
     }
 
     @Override
-    public Vector add(Vector vector) {
+    public String toString() {
+        return Arrays.toString(coordinates);
+    }
+
+    protected Vector add(Vector vector) {
         double[] newCoordinates = new double[coordinates.length];
         for (int i = 0; i < coordinates.length; i++)
             newCoordinates[i] = coordinates[i] + vector.coordinates[i];
         return newVector(newCoordinates);
     }
 
-    @Override
-    public Vector sub(Vector vector) {
-        double[] newCoordinates = new double[coordinates.length];
-        for (int i = 0; i < coordinates.length; i++)
-            newCoordinates[i] = coordinates[i] - vector.coordinates[i];
-        return newVector(newCoordinates);
+    protected Vector sub(Vector vector) {
+        return add(vector.multiplyBy(-1));
     }
 
-    @Override
-    public Vector multiplyBy(double scalar) {
+    protected Vector multiplyBy(double scalar) {
         double[] newCoordinates = new double[coordinates.length];
         for (int i = 0; i < coordinates.length; i++)
             newCoordinates[i] = scalar * coordinates[i];
         return newVector(newCoordinates);
     }
 
-    @Override
-    public double scalarProduct(Vector vector) {
+    protected double scalarProduct(Vector vector) {
         double product = 0;
         for (int i = 0; i < coordinates.length; i++)
             product += coordinates[i] * vector.coordinates[i];
         return product;
-    }
-
-    @Override
-    public double length() {
-        double sum = 0;
-        for (double e : coordinates)
-            sum += e * e;
-        return Math.sqrt(sum);
     }
 }
