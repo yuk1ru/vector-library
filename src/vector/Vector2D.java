@@ -14,19 +14,19 @@ public class Vector2D extends Vector {
         return new Vector2D(coordinates);
     }
 
-    public Vector2D add(Vector2D vector) {
+    public Vector2D add2D(Vector2D vector) {
         return (Vector2D)super.add(vector);
     }
 
-    public Vector2D sub(Vector2D vector) {
+    public Vector2D sub2D(Vector2D vector) {
         return (Vector2D)super.sub(vector);
     }
 
-    public Vector2D multiplyBy(double scalar) {
+    public Vector2D multiplyBy2D(double scalar) {
         return (Vector2D)super.multiplyBy(scalar);
     }
 
-    public double scalarProduct(Vector2D vector) {
+    public double scalarProduct2D(Vector2D vector) {
         return super.scalarProduct(vector);
     }
 }

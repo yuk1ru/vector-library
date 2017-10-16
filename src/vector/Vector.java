@@ -2,7 +2,7 @@ package vector;
 
 import java.util.Arrays;
 
-abstract class Vector {
+abstract class Vector implements IVector{
     protected double[] coordinates;
 
     protected abstract Vector newVector(double[] coordinates);
@@ -37,25 +37,25 @@ abstract class Vector {
         return Arrays.toString(coordinates);
     }
 
-    protected Vector add(Vector vector) {
+    public Vector add(Vector vector) {
         double[] newCoordinates = new double[coordinates.length];
         for (int i = 0; i < coordinates.length; i++)
             newCoordinates[i] = coordinates[i] + vector.coordinates[i];
         return newVector(newCoordinates);
     }
 
-    protected Vector sub(Vector vector) {
+    public Vector sub(Vector vector) {
         return add(vector.multiplyBy(-1));
     }
 
-    protected Vector multiplyBy(double scalar) {
+    public Vector multiplyBy(double scalar) {
         double[] newCoordinates = new double[coordinates.length];
         for (int i = 0; i < coordinates.length; i++)
             newCoordinates[i] = scalar * coordinates[i];
         return newVector(newCoordinates);
     }
 
-    protected double scalarProduct(Vector vector) {
+    public double scalarProduct(Vector vector) {
         double product = 0;
         for (int i = 0; i < coordinates.length; i++)
             product += coordinates[i] * vector.coordinates[i];

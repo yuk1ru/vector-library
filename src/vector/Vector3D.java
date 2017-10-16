@@ -14,19 +14,19 @@ public class Vector3D extends Vector{
         return new Vector3D(coordinates);
     }
 
-    public Vector3D add(Vector3D vector) {
+    public Vector3D add3D(Vector3D vector) {
         return (Vector3D)super.add(vector);
     }
 
-    public Vector3D sub(Vector3D vector) {
+    public Vector3D sub3D(Vector3D vector) {
         return (Vector3D)super.sub(vector);
     }
 
-    public Vector3D multiplyBy(double scalar) {
+    public Vector3D multiplyBy3D(double scalar) {
         return (Vector3D)super.multiplyBy(scalar);
     }
 
-    public double scalarProduct(Vector3D vector) {
+    public double scalarProduct3D(Vector3D vector) {
         return super.scalarProduct(vector);
     }
 }

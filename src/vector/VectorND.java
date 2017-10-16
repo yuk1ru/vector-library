@@ -17,17 +17,17 @@ public class VectorND extends Vector {
             throw new RuntimeException("Vectors have different dimensions");
     }
 
-    public VectorND add(VectorND vector) {
+    public VectorND addND(VectorND vector) {
         dimensionCheck(vector);
         return (VectorND)super.add(vector);
     }
 
-    public VectorND sub(VectorND vector) {
+    public VectorND subND(VectorND vector) {
         dimensionCheck(vector);
         return (VectorND)super.sub(vector);
     }
 
-    public VectorND multiplyBy(double scalar) {
+    public VectorND multiplyByND(double scalar) {
         return (VectorND)super.multiplyBy(scalar);
     }
 

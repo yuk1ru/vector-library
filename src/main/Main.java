@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         Vector2D a = new Vector2D(1, 1);
-        Vector2D b = new Vector2D(1, 1);
-        System.out.println(a.equals(b));
+        Vector3D b = new Vector3D(1, 1,  1);
+        a.add2D(b);
     }
 }
