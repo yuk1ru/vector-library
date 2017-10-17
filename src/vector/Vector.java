@@ -3,7 +3,7 @@ package vector;
 import java.util.Arrays;
 
 abstract class Vector {
-    protected double[] coordinates;
+    double[] coordinates;
 
     protected abstract Vector newVector(double[] coordinates);
 
@@ -37,14 +37,14 @@ abstract class Vector {
         return Arrays.toString(coordinates);
     }
 
-    protected Vector add(Vector vector) {
+    Vector add(Vector vector) {
         double[] newCoordinates = new double[coordinates.length];
         for (int i = 0; i < coordinates.length; i++)
             newCoordinates[i] = coordinates[i] + vector.coordinates[i];
         return newVector(newCoordinates);
     }
 
-    protected Vector sub(Vector vector) {
+    Vector sub(Vector vector) {
         return add(vector.multiplyBy(-1));
     }
 
@@ -55,7 +55,7 @@ abstract class Vector {
         return newVector(newCoordinates);
     }
 
-    protected double scalarProduct(Vector vector) {
+    double scalarProduct(Vector vector) {
         double product = 0;
         for (int i = 0; i < coordinates.length; i++)
             product += coordinates[i] * vector.coordinates[i];
