@@ -25,7 +25,7 @@ abstract class Vector {
             return false;
         if (!this.getClass().isAssignableFrom(obj.getClass()))
             return false;
-        final Vector other = (Vector) obj;
+        Vector other = (Vector) obj;
         for (int i = 0; i < coordinates.length; i++)
             if (other.coordinates[i] != coordinates[i])
                 return false;
